@@ -10,7 +10,7 @@ kubectl apply -f pods/namespace/oretademosite-namespace.yaml
 
 kubectl apply -f <(istioctl kube-inject -f pods/app/oretademosite-app.yaml)
 
-kubectl apply -f <(istioctl kube-inject -f pods/app/networking/oretademosite-gateway.yaml)
+kubectl apply -f <(istioctl kube-inject -f pods/networking/oretademosite-gateway.yaml)
 ```
 
 2. Remove the oretademosite-v3 deployment to deploy on remote:
