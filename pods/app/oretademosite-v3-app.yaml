@@ -1,0 +1,43 @@
+##################################################
+# oretademosite service
+########################################### 
+apiVersion: v1
+kind: Service
+metadata:
+  name: oretademosite
+  namespace: oreta-app
+  labels:
+    app: oretademosite
+spec:
+  ports:
+  - port: 80
+    name: http
+  selector:
+    app: oretademosite
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: oretademosite-v3
+  namespace: oreta-app
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: oretademosite
+        version: v3
+    spec:
+      containers:
+      - name: oretademosite
+        image: asia.gcr.io/vantage2018-gke/website:v3.0
+        # env:
+        # - name: GOOGLE_APPLICATION_CREDENTIALS
+        #   value: /Users/donsantmajor/.config/gcloud/oretagcp07-9f7f4197ecef.json
+        # resources:
+        #   requests:
+        #     cpu: "100m"
+        imagePullPolicy: IfNotPresent #Always
+        ports:
+        - containerPort: 80
+
