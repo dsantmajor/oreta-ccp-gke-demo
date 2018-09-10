@@ -6,7 +6,7 @@
 ```
 kubectl config use-context gke_vantage2018-gke_australia-southeast1-a_oreta-gke
 
-kubectl apply -f pods/app/namespace/oretademosite-namespace.yaml
+kubectl apply -f pods/namespace/oretademosite-namespace.yaml
 
 kubectl apply -f <(istioctl kube-inject -f pods/app/oretademosite-app.yaml)
 
@@ -22,7 +22,7 @@ kubectl delete deployment reviews-v3
 
 ```
 kubectl config use-context kubernetes-admin@kubernetes
-kubectl apply -f pods/app/namespace/oretademosite-namespace.yaml
+kubectl apply -f pods/namespace/oretademosite-namespace.yaml
 kubectl apply -f <(istioctl kube-inject -f pods/app/oretademosite-v3-app.yaml)
 ```
 4. Get the istio-ingressgateway service’s external IP to access the oretademoaite to validate that Istio is including the remote’s oretademosite-v3 instance in the load balancing of app versions between on-prem and cloud:
