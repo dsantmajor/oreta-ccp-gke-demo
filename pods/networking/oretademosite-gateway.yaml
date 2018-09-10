@@ -30,4 +30,4 @@ spec:
     - destination:
         host: oretademosite
         port:
-          number: 80
+          number: 9090
