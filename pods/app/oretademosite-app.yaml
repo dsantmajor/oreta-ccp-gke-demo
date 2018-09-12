@@ -10,7 +10,7 @@ metadata:
     app: oretademosite
 spec:
   ports:
-  - port: 9090
+  - port: 9081
     name: http
   selector:
     app: oretademosite
@@ -39,7 +39,7 @@ spec:
         #     cpu: "100m"
         imagePullPolicy: IfNotPresent #Always
         ports:
-        - containerPort: 9090
+        - containerPort: 9081
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -65,7 +65,7 @@ spec:
         #     cpu: "100m"
         imagePullPolicy: IfNotPresent #Always
         ports:
-        - containerPort: 9090
+        - containerPort: 9081
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -91,5 +91,5 @@ spec:
         #     cpu: "100m"
         imagePullPolicy: IfNotPresent #Always
         ports:
-        - containerPort: 9090
+        - containerPort: 9081
 

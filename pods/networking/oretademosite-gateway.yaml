@@ -25,9 +25,9 @@ spec:
   http:
   - match:
     - uri:
-        exact: /ccpdemo
+        exact: /demo
     route:
     - destination:
         host: oretademosite
         port:
-          number: 9090
+          number: 9081
