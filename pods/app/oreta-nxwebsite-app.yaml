@@ -1,0 +1,129 @@
+##################################################
+# oreta Nginx website service
+########################################### 
+apiVersion: v1
+kind: Service
+metadata:
+  name: oretanxwebsite
+  # namespace: oreta-namespace
+  labels:
+    app: oretanxwebsite
+spec:
+  ports:
+  - port: 9082
+    name: http
+  selector:
+    app: oretanxwebsite
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: oretanxwebsite-v1
+  # namespace: oreta-namespace
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: oretanxwebsite
+        version: v1
+    spec:
+      containers:
+      - name: oretanxwebsite
+        image: asia.gcr.io/vantage2018-gke/nxwebsite:v6.0
+        # env:
+        # - name: GOOGLE_APPLICATION_CREDENTIALS
+        #   value: /Users/donsantmajor/.config/gcloud/oretagcp07-9f7f4197ecef.json        
+        # resources:
+        #   requests:
+        #     cpu: "100m"
+        imagePullPolicy: IfNotPresent #Always
+        ports:
+        - containerPort: 9082
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: oretanxwebsite-v2
+  # namespace: oreta-namespace
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: oretanxwebsite
+        version: v2
+    spec:
+      containers:
+      - name: oretanxwebsite
+        image: asia.gcr.io/vantage2018-gke/nxwebsite:v5.0
+        # env:
+        # - name: GOOGLE_APPLICATION_CREDENTIALS
+        #   value: /Users/donsantmajor/.config/gcloud/oretagcp07-9f7f4197ecef.json
+        # resources:
+        #   requests:
+        #     cpu: "100m"
+        imagePullPolicy: IfNotPresent #Always
+        ports:
+        - containerPort: 9082
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: oretanxwebsite-v3
+  # namespace: oreta-namespace
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: oretanxwebsite
+        version: v3
+    spec:
+      containers:
+      - name: oretanxwebsite
+        image: asia.gcr.io/vantage2018-gke/nxwebsite:v4.0
+        # env:
+        # - name: GOOGLE_APPLICATION_CREDENTIALS
+        #   value: /Users/donsantmajor/.config/gcloud/oretagcp07-9f7f4197ecef.json
+        # resources:
+        #   requests:
+        #     cpu: "100m"
+        imagePullPolicy: IfNotPresent #Always
+        ports:
+        - containerPort: 9082
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: oretanxwebsite-gateway
+spec:
+  selector:
+    istio: ingressgateway # use istio default controller
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: oretanxwebsite
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - oretanxwebsite-gateway
+  http:
+  - match:
+    - uri:
+        exact: /ccpdemo
+    route:
+    - destination:
+        host: oretanxwebsite
+        port:
+          number: 9082
+
