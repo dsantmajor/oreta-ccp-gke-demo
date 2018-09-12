@@ -30,7 +30,7 @@ spec:
     spec:
       containers:
       - name: oretademosite
-        image: asia.gcr.io/vantage2018-gke/website:v1.0
+        image: asia.gcr.io/vantage2018-gke/website:v5.0
         # env:
         # - name: GOOGLE_APPLICATION_CREDENTIALS
         #   value: /Users/donsantmajor/.config/gcloud/oretagcp07-9f7f4197ecef.json        
@@ -56,7 +56,7 @@ spec:
     spec:
       containers:
       - name: oretademosite
-        image: asia.gcr.io/vantage2018-gke/website:v2.0
+        image: asia.gcr.io/vantage2018-gke/website:v4.0
         # env:
         # - name: GOOGLE_APPLICATION_CREDENTIALS
         #   value: /Users/donsantmajor/.config/gcloud/oretagcp07-9f7f4197ecef.json
